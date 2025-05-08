@@ -356,23 +356,6 @@ def chatBot(query):
     print("Chatbot Response:", response)
     
     return response
-    
-# def chatBot(query):
-#     user_input = query.lower()
-#     chatbot = hugchat.ChatBot(cookie_path="engine/cookies.json")
-#     id = chatbot.new_conversation()
-#     chatbot.change_conversation(id)
-#     response = chatbot.chat(user_input)
-
-#     # Shorten response (limit to first 2 sentences)
-#     short_response = ". ".join(response.split(". ")[:2])  
-
-#     print("User Query:", query)
-#     print("Chatbot Response:", short_response)
-
-#     speak(short_response)
-#     return short_response
-
 
 # android automation
 
@@ -381,8 +364,6 @@ def makeCall(name, mobileNo):
     speak("Calling "+name)
     command = 'adb shell am start -a android.intent.action.CALL -d tel:'+mobileNo
     os.system(command)
-
-
 
 # to send message
 def sendMessage(message, mobileNo, name):
@@ -410,76 +391,3 @@ def sendMessage(message, mobileNo, name):
     speak("message send successfully to "+name)
 
 
-def on_mobile():
-    print('starting mobile')
-    from engine.helper import replace_spaces_with_percent_s, goback, keyEvent, tapEvents, adbInput
-    # tap on screen for on
-    tapEvents(300,1000)
-    tapEvents(300, 1000)
-    
-    print('hhe')
-    os.system('adb shell input swipe 360 1155 312 510 300')
-
-
-def extract_search_query_for_google(query):
-    start = query.find("search") + 7  # "open " is 5 characters
-    if 'on google' in query:
-
-        end = query.find("on google")  # Find the position of "pdf"
-    if 'in google' in query:
-        end = query.find("in google") 
-        # Extract file name
-    search = query[start:end].strip()
-    print(search)
-    return search
-    
-    return None
-
-
-def search_on_google(search):
-    message = search
-    print(message)
-    from engine.helper import replace_spaces_with_percent_s, goback, keyEvent, tapEvents, adbInput
-    message = replace_spaces_with_percent_s(message)
-    goback(4)
-    tapEvents(272, 975)
-    time.sleep(1)
-    adbInput(message)
-    tapEvents(654, 1464)
-    speak(search , 'on google in your mobile')
-    print(search , 'on google in your mobile')
-    eel.DisplayMessage(search , 'on google in your mobile')
-
-
-
-# open app 
-def extract_search_word_for_open_app(command):
-    # Possible keywords
-    command = command.replace("my","")
-    command = command.strip()
-    print(command)
-    start = command.find("open") + 5 # "open " is 5 characters
-    end = command.find("app") 
-        # Extract file name
-    app_name = command[start:end].strip()
-    print(app_name)
-    return app_name
-    
-    return None
-
-
-def open_app(app_name):
-    print('hhhhhhh')
-    from engine.helper import goback, keyEvent, tapEvents, adbInput , swipe
-    # goback(5)
-    #swipe up 
-    time.sleep(1)
-    swipe(430, 810, 403, 282, 300)
-    # tap on search 
-    tapEvents(90,105)
-    # input app name 
-    adbInput(app_name)
-    time.sleep(1)
-     # tab on app
-    tapEvents(105,300)
-    speak('Opening Completed !')
