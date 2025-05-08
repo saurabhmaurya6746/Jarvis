@@ -76,15 +76,10 @@ def allCommands(message=1):
             print(file_name,search_word)
             if file_name and search_word:
                 from engine.features import open_pdf_and_search
-                # print('here going')
                 open_pdf_and_search(file_name, search_word)
 
         elif 'open' in query and 'recent app' in query or 'recent tab' in query or 'recent apps' in query:
             from engine.helper import open_recent_apps
-            # speak('which app ')
-            # app_name= takecommand()
-            # app_name= 'youtube'
-            print('open')
             speak("opening recent apps ")
             open_recent_apps()
         elif ('close' in query or 'closed' in query) or ('remove' in query or 'removed' in query) and ('from' in query or 'in' in query) and ('recent app' in query or 'recent apps' in query):
@@ -99,16 +94,7 @@ def allCommands(message=1):
         elif ('close' in query or 'closed' in query) or ('all app' in query or 'all apps' in query) or ('all my app' in query or 'all my apps' in query) or ('all recent app' in query or 'all recent apps' in query):
             from engine.helper import close_all_apps,go_home
             go_home()
-            close_all_apps()
-    
-        elif 'open' in query and 'app' in query:
-            from engine.features import open_app ,extract_search_word_for_open_app
-            app = extract_search_word_for_open_app(query)
-            print('Opening' , app)
-            speak(f"Opening....{app}")
-            from engine.features import open_app
-            time.sleep(2)
-            open_app(app)    
+            close_all_apps()  
         elif 'take screnshot' in query or 'take screenshot' in query:
             from engine.mobile import take_screenshot 
             speak('taking screenshot')
